@@ -100,25 +100,28 @@
       </p>
 
       <div class="mt-10 flex md:justify-start justify-center">
-  <div style="width:320px; height:120px; position:relative; overflow:visible; flex-shrink:0;">
-  <div id="paypal-button-hero"
-       style="position:absolute; top:0; left:0; width:100%;">
+  <div style="display:flex; flex-direction:column; gap:0; width:320px;">
+
+    <!-- Instant Access arriba del botón -->
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+      <div style="width:32px; height:32px; background:#3f3f46; border:2px solid #18181b; border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+        <img src="https://i.postimg.cc/zvsTzrYv/papeldorado.png" style="width:16px; height:16px; object-fit:contain;">
+      </div>
+      <div>
+        <div style="font-weight:500; font-size:0.875rem;">Instant Access</div>
+        <div style="color:#a1a1aa; font-size:0.75rem;">Ready-to-use digital system</div>
+      </div>
+    </div>
+
+    <!-- Widget PayPal -->
+    <div style="position:relative; overflow:visible; flex-shrink:0; height:120px;">
+      <div id="paypal-button-hero"
+           style="position:absolute; top:0; left:0; width:100%;">
+      </div>
+    </div>
+
   </div>
 </div>
-</div>
-
-      <div class="flex items-center gap-3 text-sm mt-4">
-        <div class="flex -space-x-3">
-          <div class="w-8 h-8 bg-zinc-700 border-2 border-zinc-900 rounded-2xl flex items-center justify-center">
-            <img src="https://i.postimg.cc/zvsTzrYv/papeldorado.png" class="w-4 h-4 object-contain">
-          </div>
-        </div>
-
-        <div>
-          <div class="font-medium">Instant Access</div>
-          <div class="text-zinc-400 text-xs">Ready-to-use digital system</div>
-        </div>
-      </div>
     </div>
 
     <div class="md:block self-start" id="ebook-cover">
