@@ -11,7 +11,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap');
         
-
+        @media (min-width: 768px) {
+  #nav-links {
+    display: flex !important;
+  }
+}
        
         body {
             font-family: 'Inter', system_ui, sans-serif;
@@ -58,7 +62,7 @@
                     <span class="text-xs block -mt-1 text-indigo-400">PRO</span>
                 </div>
             </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+            <div id="nav-links" style="display:none; align-items:center; gap:2rem; font-size:0.875rem; font-weight:500;">
                 <a href="#problema" class="hover:text-white transition">The Problem</a>
                 <a href="#solucion" class="hover:text-white transition">The Solution</a>
                 <a href="#incluye" class="hover:text-white transition">What's Included</a>
