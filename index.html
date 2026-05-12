@@ -412,7 +412,15 @@
             <h2 class="heading-font text-5xl font-bold">Start working smarter today</h2>
 <p class="mt-6 text-xl text-zinc-300">You get instant access to the full PDF guide, and future updates — for a one-time payment of $47.</p>
 <p class="mt-3 text-zinc-400 text-sm">If one structured prompt saves you one hour of drafting time, it has already paid for itself ten times over.</p>
-           
+
+<div class="mt-10 flex justify-center">
+  <div style="width:320px; height:150px; position:relative; overflow:visible; flex-shrink:0;">
+    <div id="paypal-button-cta"
+         style="position:absolute; top:0; left:0; width:100%;">
+    </div>
+  </div>
+</div>
+
 <div class="mt-12"></div>
 </div>
 </section>
@@ -430,13 +438,15 @@
     
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-
   if (!window.paypal) return;
 
   paypal.HostedButtons({
     hostedButtonId: "5ZVGEYFTB3TGS"
   }).render("#paypal-button-hero");
 
+  paypal.HostedButtons({
+    hostedButtonId: "5ZVGEYFTB3TGS"
+  }).render("#paypal-button-cta");
 });
 </script>
     
