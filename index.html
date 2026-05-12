@@ -444,9 +444,16 @@ document.addEventListener("DOMContentLoaded", function () {
     hostedButtonId: "5ZVGEYFTB3TGS"
   }).render("#paypal-button-hero");
 
-  paypal.HostedButtons({
-    hostedButtonId: "5ZVGEYFTB3TGS"
-  }).render("#paypal-button-cta");
+  // En el CTA, clonar el contenedor del hero cuando esté listo
+  setTimeout(() => {
+    const hero = document.getElementById('paypal-button-hero');
+    const cta = document.getElementById('paypal-button-cta');
+    if (hero && cta) {
+      const clone = hero.cloneNode(true);
+      clone.id = 'paypal-button-cta-inner';
+      cta.appendChild(clone);
+    }
+  }, 2000);
 });
 </script>
     
