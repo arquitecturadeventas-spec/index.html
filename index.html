@@ -55,45 +55,6 @@
     isolation: isolate;
     z-index: 20;        
 }
-/* Estilos para la portada y la animación de ocultado */
-#ebook-cover {
-    transition: transform 300ms ease, opacity 300ms ease;
-    will-change: transform, opacity;
-}
-
-/* Estado oculto (aplica con JS: add class 'cover-hidden') */
-#ebook-cover.cover-hidden {
-    opacity: 0;
-    transform: translateY(12px) scale(0.98);
-    pointer-events: none; /* deja interactuar con lo que queda abajo */
-    visibility: hidden;
-}
-
-/* El botón de cierre tiene sombra ligera en móvil */
-@media (max-width: 767px) {
-    #cover-close { box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
-}
-        @media (max-width: 767px) {
-    
-    #ebook-cover {
-        position: fixed;
-        right: 1rem;
-        top: calc(4.25rem + 0.5rem);
-        width: calc(100% - 2rem);
-        max-width: 340px;
-        z-index: 999999;
-        display: block !important;
-        border-radius: 1rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        background: transparent;
-    }
-
-
-    #paypal-wrapper { z-index: 20; }
-
-
-    .hero-left-isolate { z-index: 20; }
-}
     </style>
 </head>
 <body class="bg-zinc-950 text-zinc-200">
@@ -131,7 +92,7 @@
     <div class="max-w-6xl mx-auto px-6 py-10 md:py-20 grid md:grid-cols-2 gap-12 items-start">
 
         <!-- Columna izquierda — isolation:isolate contiene el dropdown de PayPal -->
-        <div class="hero-left-isolate" style="position: relative;">
+        <div style="isolation: isolate; position: relative; z-index: 1;">
             <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-3xl text-sm mb-6">
                 <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
                 Updated 2026 • Based on Industry Studies
@@ -163,17 +124,12 @@
             </div>
         </div>
 
-                
-        <div class="block self-start" id="ebook-cover" aria-hidden="false">
-            <button id="cover-close" aria-label="Cerrar portada"
-                    style="position:absolute; top:0.5rem; right:0.5rem; z-index:1000000; background:rgba(0,0,0,0.45); border:0; color:#fff; width:36px; height:36px; border-radius:999px; display:flex; align-items:center; justify-content:center; font-size:18px;">
-                ✕
-            </button>
+        <!-- Portada — z-index:20 la mantiene siempre encima del dropdown -->
+        <div class="block self-start" id="ebook-cover">
             <img src="https://i.postimg.cc/g2TLmpyb/ff.png"
                  alt="Scales of Justice"
-                 class="rounded-3xl shadow-2xl border border-white/10 w-full h-full object-contain"
-                 id="ebook-cover-img">
-        </div>>
+                 class="rounded-3xl shadow-2xl border border-white/10 w-full h-full object-contain">
+        </div>
 
     </div>
 </section>
@@ -440,67 +396,20 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    // --- tu código PayPal existente ---
-    if (window.paypal) {
-        paypal.HostedButtons({ hostedButtonId: "5ZVGEYFTB3TGS" })
-              .render("#paypal-button-hero");
-        setTimeout(() => {
-            const hero = document.getElementById('paypal-button-hero');
-            const cta  = document.getElementById('paypal-button-cta');
-            if (hero && cta) {
-                const clone = hero.cloneNode(true);
-                clone.id = 'paypal-button-cta-inner';
-                cta.appendChild(clone);
-            }
-        }, 2000);
-    }
+    if (!window.paypal) return;
 
-    // --- NUEVO: control de la portada ---
-    const cover = document.getElementById('ebook-cover');
-    const coverClose = document.getElementById('cover-close');
-    const paypalWrapper = document.getElementById('paypal-wrapper');
+    paypal.HostedButtons({ hostedButtonId: "5ZVGEYFTB3TGS" })
+          .render("#paypal-button-hero");
 
-    function hideCover() {
-        if (!cover) return;
-        cover.classList.add('cover-hidden');
-        cover.setAttribute('aria-hidden', 'true');
-    }
-    function showCover() {
-        if (!cover) return;
-        cover.classList.remove('cover-hidden');
-        cover.setAttribute('aria-hidden', 'false');
-    }
-
-    // Cerrar al pulsar la X
-    if (coverClose) {
-        coverClose.addEventListener('click', function (e) {
-            e.stopPropagation();
-            hideCover();
-        });
-    }
-
-    // Si el usuario interactúa con el area de PayPal (tap/click), ocultamos la portada
-    if (paypalWrapper) {
-        // escucha click/tap y también toca dentro del iframe (algunos navegadores no permiten detectar iframe clicks)
-        paypalWrapper.addEventListener('click', function () {
-            hideCover();
-        });
-
-        // También ocultar después de que el botón hero esté renderizado y el usuario lo pulse:
-        // Observador simple: cuando aparezca un iframe dentro del wrapper, ocultamos la portada
-        const observer = new MutationObserver((mutations) => {
-            for (const m of mutations) {
-                if (m.addedNodes && m.addedNodes.length) {
-                    hideCover();
-                }
-            }
-        });
-        observer.observe(paypalWrapper, { childList: true, subtree: true });
-    }
-
-    // (Opcional) Si quieres que la portada reaparezca tras X segundos:
-    // setTimeout(showCover, 10000); // rehacer aparecer tras 10s (quita si no lo quieres)
-
+    setTimeout(() => {
+        const hero = document.getElementById('paypal-button-hero');
+        const cta  = document.getElementById('paypal-button-cta');
+        if (hero && cta) {
+            const clone = hero.cloneNode(true);
+            clone.id = 'paypal-button-cta-inner';
+            cta.appendChild(clone);
+        }
+    }, 2000);
 });
 </script>
 
