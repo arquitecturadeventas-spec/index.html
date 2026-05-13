@@ -92,7 +92,7 @@
     <div class="max-w-6xl mx-auto px-6 py-10 md:py-20 grid md:grid-cols-2 gap-12 items-start">
 
         <!-- Columna izquierda — isolation:isolate contiene el dropdown de PayPal -->
-        <div style="isolation: isolate; position: relative; z-index: 10;">
+        <div class="order-2 md:order-1" style="isolation: isolate; position: relative; z-index: 10;">
             <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-3xl text-sm mb-6">
                 <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
                 Updated 2026 • Based on Industry Studies
@@ -125,7 +125,7 @@
         </div>
 
         <!-- Portada — z-index:20 la mantiene siempre encima del dropdown -->
-        <div class="block self-start" id="ebook-cover">
+        <div class="block self-start order-1 md:order-2" id="ebook-cover">
             <img src="https://i.postimg.cc/g2TLmpyb/ff.png"
                  alt="Scales of Justice"
                  class="rounded-3xl shadow-2xl border border-white/10 w-full h-full object-contain">
