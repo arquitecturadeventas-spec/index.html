@@ -17,6 +17,16 @@
   }
 }
        
+        #ebook-cover {
+  position: relative;
+  z-index: 10;
+}
+
+#paypal-button-hero > div {
+  z-index: 1;
+  position: relative;
+}
+        
         body {
             font-family: 'Inter', system_ui, sans-serif;
         }
@@ -114,7 +124,7 @@
     </div>
 
     <!-- Widget PayPal -->
-    <div style="position:relative; overflow:visible; flex-shrink:0; height:120px; width:100%;">
+    <div style="position:relative; overflow:visible; flex-shrink:0; height:120px; width:100%; z-index:1;">
       <div id="paypal-button-hero"
            style="position:absolute; top:0; left:0; width:100%;">
       </div>
